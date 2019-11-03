@@ -8,7 +8,8 @@
 void GameInstance::StartGame(const int rows, const int columns)
 {
 	_gameState = std::make_shared<GameState>(rows, columns);
-	_console = std::make_shared<Console>();
+	// TODO: Creating to shared pointers to the same object (double deletion).
+	_console = std::make_shared<Console>(std::shared_ptr<GameInstance>(this));
 	_enemySpawner = std::make_shared<EnemySpawner>();
 	_gameSettings = std::make_shared<GameSettings>(rows, columns);
 
