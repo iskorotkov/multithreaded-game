@@ -6,6 +6,10 @@ void GameInstance::StartGame(const int rows, const int columns)
 	_gameState = std::make_shared<GameState>(rows, columns);
 	_console = std::make_shared<Console>();
 	_enemySpawner = std::make_shared<EnemySpawner>();
+	_gameSettings = std::make_shared<GameSettings>(rows, columns);
+
+	_enemySpawner->StartSpawning({ this });
+	// TODO: Where do I need to call spawner->StartGame()?
 }
 
 std::shared_ptr<GameState> GameInstance::GetGameState() const

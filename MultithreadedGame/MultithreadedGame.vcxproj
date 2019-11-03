@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BulletActivity.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyActivity.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="Score.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BulletActivity.h" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="Enemy.h" />

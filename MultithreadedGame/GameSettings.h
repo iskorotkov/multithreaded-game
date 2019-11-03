@@ -3,7 +3,7 @@
 class GameSettings
 {
 public:
-	// TODO: Add methods to change fields' values.
+	GameSettings(int rows, int columns);
 	
 	[[nodiscard]] int GetMinRow() const;
 	[[nodiscard]] int GetMaxRow() const;
@@ -12,6 +12,6 @@ public:
 	
 private:
 	int _minRow = 0;
-	int _rows = 10;
-	int _width = 50;
+	int _rows;
+	int _width;
 };

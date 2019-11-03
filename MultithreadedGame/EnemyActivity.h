@@ -10,6 +10,6 @@ public:
 
 private:
 	static void HitEnemy(Enemy& enemy);
-	[[nodiscard]] static bool IsEnemyStillOnScreen(const Enemy& enemy);
+	[[nodiscard]] static bool IsEnemyStillOnScreen(const Enemy& enemy, std::shared_ptr<GameSettings> gameSettings);
 	static bool CheckForEnemyHit(const std::shared_ptr<GameState>& gameState, Enemy& enemy);
 };

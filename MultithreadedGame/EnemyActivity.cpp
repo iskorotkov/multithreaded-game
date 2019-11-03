@@ -1,10 +1,10 @@
 ﻿#include "EnemyActivity.h"
 #include <chrono>
 
-bool EnemyActivity::IsEnemyStillOnScreen(const Enemy& enemy)
+bool EnemyActivity::IsEnemyStillOnScreen(const Enemy& enemy, std::shared_ptr<GameSettings> gameSettings)
 {
 	const auto position = enemy.GetPosition();
-	const auto width = enemy.GetWidth();
+	const auto width = gameSettings->Width();
 	return position.first >= 0 && position.first < width;
 }
 
@@ -28,8 +28,10 @@ void EnemyActivity::operator()(Enemy enemy, std::shared_ptr<GameInstance> gameIn
 	const auto gameState = gameInstance->GetGameState();
 	const auto console = gameInstance->GetConsole();
 	const auto enemySpawner = gameInstance->GetEnemySpawner();
+	const auto gameSettings = gameInstance->GetGameSettings();
 
-	while (IsEnemyStillOnScreen(enemy) && !enemy.WasHit())
+	while (IsEnemyStillOnScreen(enemy, gameSettings)
+		&& !enemy.WasHit())
 	{
 		CheckForEnemyHit(gameState, enemy);
 
@@ -67,6 +69,5 @@ void EnemyActivity::operator()(Enemy enemy, std::shared_ptr<GameInstance> gameIn
 
 	if (enemy.WasHit())
 	{
-		
 	}
 }

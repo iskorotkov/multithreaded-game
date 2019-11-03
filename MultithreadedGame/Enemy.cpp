@@ -10,7 +10,6 @@ Enemy::Enemy(
 ) :
 	_movementDirection(spawnDirection),
 	_y(row),
-	_width(width),
 	_looks(std::move(looks))
 {
 	switch (_movementDirection)
@@ -57,11 +56,6 @@ char Enemy::GetLook() const
 std::pair<int, int> Enemy::GetPosition() const
 {
 	return { _x, _y };
-}
-
-int Enemy::GetWidth() const
-{
-	return _width;
 }
 
 bool Enemy::WasHit() const

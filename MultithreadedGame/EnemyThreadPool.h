@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <thread>
+#include <memory>
 #include "Enemy.h"
 #include <vector>
 #include "GameInstance.h"

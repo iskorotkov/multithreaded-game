@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <memory>
 #include <condition_variable>
 #include "GameInstance.h"
 #include "EnemyThreadPool.h"
