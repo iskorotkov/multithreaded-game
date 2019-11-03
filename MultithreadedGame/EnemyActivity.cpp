@@ -1,5 +1,12 @@
 ﻿#include "EnemyActivity.h"
 #include <chrono>
+#include "State.h"
+#include "Enemy.h"
+#include "GameSettings.h"
+#include "GameState.h"
+#include "GameInstance.h"
+#include "Console.h"
+#include "EnemySpawner.h"
 
 bool EnemyActivity::IsEnemyStillOnScreen(const Enemy& enemy, std::shared_ptr<GameSettings> gameSettings)
 {

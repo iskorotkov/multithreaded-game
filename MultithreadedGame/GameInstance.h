@@ -1,9 +1,10 @@
 ﻿#pragma once
 #include <memory>
-#include "GameState.h"
-#include "Console.h"
-#include "EnemySpawner.h"
-#include "GameSettings.h"
+
+class GameState;
+class Console;
+class EnemySpawner;
+class GameSettings;
 
 class GameInstance
 {

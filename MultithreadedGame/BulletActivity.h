@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include <memory>
-#include "GameInstance.h"
+#include <mutex>
+
+class GameInstance;
 
 class BulletActivity
 {

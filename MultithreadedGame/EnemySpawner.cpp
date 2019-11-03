@@ -1,6 +1,12 @@
 ﻿#include "EnemySpawner.h"
 #include "Random.h"
 #include <memory>
+#include "GameState.h"
+#include "GameSettings.h"
+#include "Direction.h"
+#include "Enemy.h"
+#include "EnemyThreadPool.h"
+#include "GameInstance.h"
 
 void EnemySpawner::StartGame()
 {

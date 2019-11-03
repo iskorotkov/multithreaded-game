@@ -1,5 +1,9 @@
 ﻿#include "GameInstance.h"
 #include <memory>
+#include "GameState.h"
+#include "Console.h"
+#include "EnemySpawner.h"
+#include "GameSettings.h"
 
 void GameInstance::StartGame(const int rows, const int columns)
 {
@@ -8,7 +12,8 @@ void GameInstance::StartGame(const int rows, const int columns)
 	_enemySpawner = std::make_shared<EnemySpawner>();
 	_gameSettings = std::make_shared<GameSettings>(rows, columns);
 
-	_enemySpawner->StartSpawning({ this });
+	// BUG: Pass by ref or by pointer. It's the only place where we have shared ptr to GameInstance.
+	_enemySpawner->StartSpawning(std::shared_ptr<GameInstance>(this));
 	// TODO: Where do I need to call spawner->StartGame()?
 }
 

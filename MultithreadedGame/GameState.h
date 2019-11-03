@@ -23,6 +23,6 @@ public:
 
 private:
 	std::vector<std::vector<State>> _state;
-	std::shared_mutex _m;
+	mutable std::shared_mutex _m;
 	Score _score{ 0, 0 };
 };

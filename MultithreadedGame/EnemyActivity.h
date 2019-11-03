@@ -1,7 +1,10 @@
 ﻿#pragma once
-#include "Enemy.h"
 #include <memory>
-#include "GameInstance.h"
+
+class Enemy;
+class GameInstance;
+class GameState;
+class GameSettings;
 
 class EnemyActivity
 {

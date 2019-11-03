@@ -2,6 +2,7 @@
 
 #include <utility>
 #include "EnemyActivity.h"
+#include "Enemy.h"
 
 EnemyThreadPool::EnemyThreadPool(std::shared_ptr<GameInstance> gameInstance) :
 	_gameInstance(std::move(gameInstance))

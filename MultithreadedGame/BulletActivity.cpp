@@ -1,4 +1,8 @@
 ﻿#include "BulletActivity.h"
+#include "GameInstance.h"
+#include "State.h"
+#include "GameState.h"
+#include "GameSettings.h"
 
 void BulletActivity::operator()(const int x, const int y, std::shared_ptr<GameInstance> gameInstance)
 {
