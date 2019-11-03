@@ -47,7 +47,12 @@ void EnemySpawner::StartSpawning(std::shared_ptr<GameInstance> gameInstance)
 	}
 }
 
+void EnemySpawner::DecrementSpawnDelay()
+{
+	--_spawnDelay;
+}
+
 int EnemySpawner::GetSpawnDelay() const
 {
-	return _spawnDelay;
+	return _spawnDelay.load();
 }
