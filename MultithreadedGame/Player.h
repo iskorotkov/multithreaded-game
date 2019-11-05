@@ -1,5 +1,8 @@
 ﻿#pragma once
 #include <utility>
+#include <memory>
+
+class GameInstance;
 
 class Player
 {
@@ -8,7 +11,7 @@ public:
 
 	void MoveRight();
 	void MoveLeft();
-	void Shoot();
+	void Shoot(std::shared_ptr<GameInstance> gameInstance) const;
 
 	[[nodiscard]] std::pair<int, int> GetPosition() const;
 	[[nodiscard]] char GetLook() const;

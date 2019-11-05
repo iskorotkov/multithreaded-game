@@ -1,4 +1,7 @@
 ﻿#include "Player.h"
+#include <thread>
+#include "BulletActivity.h"
+#include "GameInstance.h"
 
 Player::Player(const int x, const int y, const int width) :
 	_width(width),
@@ -23,9 +26,15 @@ void Player::MoveLeft()
 	}
 }
 
-void Player::Shoot()
+void Player::Shoot(std::shared_ptr<GameInstance> gameInstance) const
 {
-	// TODO: spawn bullet thread;
+	const auto f = [x = _x, y = _y, gameInstance = std::move(gameInstance)]
+	{
+		const BulletActivity activity;
+		activity(x, y, gameInstance);
+	};
+	std::thread t(f);
+	t.detach();
 }
 
 std::pair<int, int> Player::GetPosition() const
