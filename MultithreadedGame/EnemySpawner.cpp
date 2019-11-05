@@ -44,7 +44,7 @@ void EnemySpawner::Activity(std::shared_ptr<GameInstance> gameInstance)
 			auto enemy = [gameSettings]
 			{
 				Random randomDirection(0, 2);
-				Random randomRow(gameSettings->GetMinRow(), gameSettings->GetMaxRow());
+				Random randomRow(gameSettings->MinEnemyRow(), gameSettings->MaxEnemyRow() + 1);
 				// TODO: Remove cast from random int to enum.
 				const auto direction = static_cast<Direction>(randomDirection());
 				return Enemy(

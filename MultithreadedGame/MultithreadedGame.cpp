@@ -15,7 +15,7 @@ int main()
 
 	Player player(
 		gameSettings->Width() / 2,
-		gameSettings->GetMaxRow() - 1
+		gameSettings->PlayerRow()
 	);
 
 	InputComponent inputComponent;

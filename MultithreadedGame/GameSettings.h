@@ -5,10 +5,14 @@ class GameSettings
 public:
 	GameSettings(int rows, int columns);
 	
-	[[nodiscard]] int GetMinRow() const;
-	[[nodiscard]] int GetMaxRow() const;
+	[[nodiscard]] int MinRow() const;
+	[[nodiscard]] int MaxRow() const;
 	[[nodiscard]] int Rows() const;
 	[[nodiscard]] int Width() const;
+
+	[[nodiscard]] int PlayerRow() const;
+	[[nodiscard]] int MinEnemyRow() const;
+	[[nodiscard]] int MaxEnemyRow() const;
 	
 private:
 	int _minRow = 0;

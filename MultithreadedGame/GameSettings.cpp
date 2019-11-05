@@ -6,14 +6,14 @@ GameSettings::GameSettings(const int rows, const int columns) :
 {
 }
 
-int GameSettings::GetMinRow() const
+int GameSettings::MinRow() const
 {
 	return _minRow;
 }
 
-int GameSettings::GetMaxRow() const
+int GameSettings::MaxRow() const
 {
-	return GetMinRow() + Rows();
+	return MinRow() + Rows() - 1;
 }
 
 int GameSettings::Rows() const
@@ -24,4 +24,19 @@ int GameSettings::Rows() const
 int GameSettings::Width() const
 {
 	return _width;
+}
+
+int GameSettings::PlayerRow() const
+{
+	return MaxRow();
+}
+
+int GameSettings::MinEnemyRow() const
+{
+	return MinRow();
+}
+
+int GameSettings::MaxEnemyRow() const
+{
+	return MaxRow() - 1;
 }

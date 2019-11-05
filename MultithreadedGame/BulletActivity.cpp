@@ -31,6 +31,5 @@ void BulletActivity::operator()(const int x, const int y, std::shared_ptr<GameIn
 bool BulletActivity::IsBulletOnScreen(int x, int y, const std::shared_ptr<GameInstance>& gameInstance)
 {
 	const auto gameSettings = gameInstance->GetGameSettings();
-	return y >= gameSettings->GetMinRow()
-	&& y < gameSettings->GetMaxRow();
+	return y >= gameSettings->MinRow() && y <= gameSettings->MaxRow();
 }
