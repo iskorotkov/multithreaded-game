@@ -18,7 +18,7 @@ void GameInstance::StartGame(const int rows, const int columns)
 	_console->ShowScore(_gameState->GetScore());
 
 	// BUG: Pass by ref or by pointer. It's the only place where we have shared ptr to GameInstance.
-	_enemySpawner->StartSpawning(std::shared_ptr<GameInstance>(this));
+	_enemySpawner->PrepareForSpawning(std::shared_ptr<GameInstance>(this));
 	// TODO: Where do I need to call spawner->StartGame()?
 }
 

@@ -31,12 +31,12 @@ int main()
 	inputComponent.AddBinding("left", [&player, &game]
 	{
 		player.MoveLeft();
-		game.GetEnemySpawner()->StartGame();
+		game.GetEnemySpawner()->StartSpawning();
 	});
 	inputComponent.AddBinding("right", [&player, &game]
 	{
 		player.MoveRight();
-		game.GetEnemySpawner()->StartGame();
+		game.GetEnemySpawner()->StartSpawning();
 	});
 
 	const auto console = game.GetConsole();

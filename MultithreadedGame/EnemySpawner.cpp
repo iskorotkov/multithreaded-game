@@ -1,20 +1,32 @@
 ﻿#include "EnemySpawner.h"
-#include "Random.h"
 #include <memory>
+#include "GameInstance.h"
+#include "Random.h"
 #include "GameState.h"
 #include "GameSettings.h"
-#include "Direction.h"
-#include "Enemy.h"
-#include "EnemyThreadPool.h"
-#include "GameInstance.h"
 
-void EnemySpawner::StartGame()
+void EnemySpawner::StartSpawning()
 {
 	_gameStarted = true;
 	_cv.notify_all();
 }
 
-void EnemySpawner::StartSpawning(std::shared_ptr<GameInstance> gameInstance)
+void EnemySpawner::PrepareForSpawning(std::shared_ptr<GameInstance> gameInstance)
+{
+	_t = std::thread(&EnemySpawner::Activity, this, gameInstance);
+}
+
+void EnemySpawner::DecrementSpawnDelay()
+{
+	--_spawnDelay;
+}
+
+int EnemySpawner::GetSpawnDelay() const
+{
+	return _spawnDelay.load();
+}
+
+void EnemySpawner::Activity(std::shared_ptr<GameInstance> gameInstance)
 {
 	using namespace std::chrono_literals;
 	std::unique_lock lock(_m);
@@ -45,14 +57,4 @@ void EnemySpawner::StartSpawning(std::shared_ptr<GameInstance> gameInstance)
 			std::this_thread::sleep_for(1s);
 		}
 	}
-}
-
-void EnemySpawner::DecrementSpawnDelay()
-{
-	--_spawnDelay;
-}
-
-int EnemySpawner::GetSpawnDelay() const
-{
-	return _spawnDelay.load();
 }
