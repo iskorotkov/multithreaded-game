@@ -2,7 +2,7 @@
 
 Random::Random(const int min, const int max) :
 	_generator(_rd()),
-	_distribution(min, max)
+	_distribution(min, max - 1)
 {
 }
 
