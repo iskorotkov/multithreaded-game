@@ -4,6 +4,7 @@
 #include "GameSettings.h"
 #include "Console.h"
 #include <thread>
+#include "EnemySpawner.h"
 
 int main()
 {
@@ -27,8 +28,16 @@ int main()
 			std::this_thread::sleep_for(100ms);
 		}
 	);
-	inputComponent.AddBinding("left", [&player] { player.MoveLeft(); });
-	inputComponent.AddBinding("right", [&player] { player.MoveRight(); });
+	inputComponent.AddBinding("left", [&player, &game]
+	{
+		player.MoveLeft();
+		game.GetEnemySpawner()->StartGame();
+	});
+	inputComponent.AddBinding("right", [&player, &game]
+	{
+		player.MoveRight();
+		game.GetEnemySpawner()->StartGame();
+	});
 
 	const auto console = game.GetConsole();
 
