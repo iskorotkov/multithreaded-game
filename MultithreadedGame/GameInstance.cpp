@@ -5,21 +5,20 @@
 #include "EnemySpawner.h"
 #include "GameSettings.h"
 
-void GameInstance::StartGame(const int rows, const int columns)
+void GameInstance::Start()
 {
-	_gameState = std::make_shared<GameState>(rows, columns);
-	// TODO: Creating to shared pointers to the same object (double deletion).
-	_console = std::make_shared<Console>(std::shared_ptr<GameInstance>(this));
-	_enemySpawner = std::make_shared<EnemySpawner>();
-	_gameSettings = std::make_shared<GameSettings>(rows, columns);
+	if (!_isGameStarted)
+	{
+		_enemySpawner->StartSpawning();
+	}
+	_isGameStarted = true;
+}
 
-	// TODO: Where do I need to show cursor again?
-	_console->SetCursorVisibility(false);
-	_console->ShowScore(_gameState->GetScore());
-
-	// BUG: Pass by ref or by pointer. It's the only place where we have shared ptr to GameInstance.
-	_enemySpawner->PrepareForSpawning(std::shared_ptr<GameInstance>(this));
-	// TODO: Where do I need to call spawner->StartGame()?
+std::shared_ptr<GameInstance> GameInstance::Create(const int rows, const int columns)
+{
+	const auto game = std::shared_ptr<GameInstance>(new GameInstance);
+	game->Initialize(rows, columns);
+	return game;
 }
 
 std::shared_ptr<GameState> GameInstance::GetGameState() const
@@ -40,4 +39,17 @@ std::shared_ptr<EnemySpawner> GameInstance::GetEnemySpawner() const
 std::shared_ptr<GameSettings> GameInstance::GetGameSettings() const
 {
 	return _gameSettings;
+}
+
+void GameInstance::Initialize(const int rows, const int columns)
+{
+	_gameState = std::make_shared<GameState>(rows, columns);
+	_console = std::make_shared<Console>(shared_from_this());
+	_enemySpawner = std::make_shared<EnemySpawner>();
+	_gameSettings = std::make_shared<GameSettings>(rows, columns);
+
+	_console->SetCursorVisibility(false);
+	_console->ShowScore(_gameState->GetScore());
+
+	_enemySpawner->PrepareForSpawning(shared_from_this());
 }

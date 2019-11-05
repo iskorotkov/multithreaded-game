@@ -12,11 +12,11 @@ class Console
 public:
 	explicit Console(std::shared_ptr<GameInstance> gameInstance);
 	
-	void WriteAt(int x, int y, char c);
-	void WriteAt(std::pair<int, int> position, char c);
+	void WriteAt(int x, int y, char c) const;
+	void WriteAt(std::pair<int, int> position, char c) const;
 
-	void ClearAt(int x, int y);
-	void ClearAt(std::pair<int, int> position);
+	void ClearAt(int x, int y) const;
+	void ClearAt(std::pair<int, int> position) const;
 
 	void SetCursorVisibility(bool visible) const;
 
@@ -26,7 +26,7 @@ public:
 
 private:
 	std::shared_ptr<GameInstance> _gameInstance;
-	std::mutex _m;
+	mutable std::mutex _m;
 	
 	HANDLE _cin;
 	HANDLE _cout;

@@ -8,8 +8,7 @@
 
 int main()
 {
-	const auto game = std::make_shared<GameInstance>();
-	game->StartGame(10, 50);
+	const auto game = GameInstance::Create(10, 50);
 
 	const auto gameSettings = game->GetGameSettings();
 
@@ -33,13 +32,13 @@ int main()
 	{
 		game->GetConsole()->ClearAt(player.GetPosition());
 		player.MoveLeft();
-		game->GetEnemySpawner()->StartSpawning();
+		game->Start();
 	});
 	inputComponent.AddBinding("right", [&player, &game]
 	{
 		game->GetConsole()->ClearAt(player.GetPosition());
 		player.MoveRight();
-		game->GetEnemySpawner()->StartSpawning();
+		game->Start();
 	});
 
 	const auto console = game->GetConsole();
