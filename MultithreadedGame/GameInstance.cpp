@@ -13,13 +13,13 @@ void GameInstance::StartGame(const int rows, const int columns)
 	_enemySpawner = std::make_shared<EnemySpawner>();
 	_gameSettings = std::make_shared<GameSettings>(rows, columns);
 
-	// BUG: Pass by ref or by pointer. It's the only place where we have shared ptr to GameInstance.
-	_enemySpawner->StartSpawning(std::shared_ptr<GameInstance>(this));
-	// TODO: Where do I need to call spawner->StartGame()?
-
 	// TODO: Where do I need to show cursor again?
 	_console->SetCursorVisibility(false);
 	_console->ShowScore(_gameState->GetScore());
+
+	// BUG: Pass by ref or by pointer. It's the only place where we have shared ptr to GameInstance.
+	_enemySpawner->StartSpawning(std::shared_ptr<GameInstance>(this));
+	// TODO: Where do I need to call spawner->StartGame()?
 }
 
 std::shared_ptr<GameState> GameInstance::GetGameState() const
