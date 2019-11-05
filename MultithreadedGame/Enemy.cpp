@@ -40,7 +40,21 @@ void Enemy::Move()
 
 void Enemy::ChangeLook()
 {
-	_lookIndex = (_lookIndex + 1) % _looks.size();
+	switch (_movementDirection)
+	{
+		case Direction::LeftToRight:
+			_lookIndex = (_lookIndex + 1) % _looks.size();
+			break;
+		case Direction::RightToLeft:
+			if (_lookIndex == 0)
+			{
+				_lookIndex = _looks.size();
+			}
+			--_lookIndex;
+			break;
+		default:
+			throw std::logic_error("Unknown type of movement.");
+	}
 }
 
 void Enemy::Hit()
