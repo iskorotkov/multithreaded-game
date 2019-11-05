@@ -17,7 +17,6 @@ public:
 	[[nodiscard]] int GetSpawnDelay() const;
 
 private:
-	std::thread _t;
 	std::atomic<int> _spawnDelay = 7;
 	bool _gameStarted = false;
 	std::condition_variable _cv;

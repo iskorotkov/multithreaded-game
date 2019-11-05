@@ -13,7 +13,8 @@ void EnemySpawner::StartSpawning()
 
 void EnemySpawner::PrepareForSpawning(std::shared_ptr<GameInstance> gameInstance)
 {
-	_t = std::thread(&EnemySpawner::Activity, this, gameInstance);
+	std::thread t(&EnemySpawner::Activity, this, gameInstance);
+	t.detach();
 }
 
 void EnemySpawner::DecrementSpawnDelay()
