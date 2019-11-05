@@ -15,7 +15,8 @@ int main()
 
 	Player player(
 		gameSettings->Width() / 2,
-		gameSettings->PlayerRow()
+		gameSettings->PlayerRow(),
+		gameSettings->Width()
 	);
 
 	InputComponent inputComponent;

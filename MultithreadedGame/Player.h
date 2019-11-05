@@ -4,7 +4,7 @@
 class Player
 {
 public:
-	Player(int x, int y);
+	Player(int x, int y, int width);
 
 	void MoveRight();
 	void MoveLeft();
@@ -14,6 +14,7 @@ public:
 	[[nodiscard]] char GetLook() const;
 	
 private:
+	int _width;
 	int _x, _y;
 	char _look = '^';
 };
