@@ -25,6 +25,16 @@ void Console::WriteAt(const std::pair<int, int> position, const char c)
 	WriteAt(position.first, position.second, c);
 }
 
+void Console::ClearAt(const int x, const int y)
+{
+	WriteAt(x, y, ' ');
+}
+
+void Console::ClearAt(const std::pair<int, int> position)
+{
+	WriteAt(position, ' ');
+}
+
 void Console::SetCursorVisibility(const bool visible) const
 {
 	CONSOLE_CURSOR_INFO cursorInfo;

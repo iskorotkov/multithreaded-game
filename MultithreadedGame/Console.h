@@ -15,6 +15,9 @@ public:
 	void WriteAt(int x, int y, char c);
 	void WriteAt(std::pair<int, int> position, char c);
 
+	void ClearAt(int x, int y);
+	void ClearAt(std::pair<int, int> position);
+
 	void SetCursorVisibility(bool visible) const;
 
 	void ShowScore(const Score& score) const;
