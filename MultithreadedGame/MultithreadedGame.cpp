@@ -30,11 +30,13 @@ int main()
 	);
 	inputComponent.AddBinding("left", [&player, &game]
 	{
+		game.GetConsole()->ClearAt(player.GetPosition());
 		player.MoveLeft();
 		game.GetEnemySpawner()->StartSpawning();
 	});
 	inputComponent.AddBinding("right", [&player, &game]
 	{
+		game.GetConsole()->ClearAt(player.GetPosition());
 		player.MoveRight();
 		game.GetEnemySpawner()->StartSpawning();
 	});

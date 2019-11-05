@@ -67,7 +67,7 @@ void EnemyActivity::operator()(Enemy enemy, std::shared_ptr<GameInstance> gameIn
 			}
 		}
 
-		console->WriteAt(enemy.GetPosition(), enemy.GetLook());
+		console->ClearAt(enemy.GetPosition());
 
 		CheckForEnemyHit(gameState, enemy);
 
