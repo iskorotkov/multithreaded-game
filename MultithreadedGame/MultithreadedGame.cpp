@@ -25,7 +25,7 @@ int main()
 		{
 			using namespace std::chrono_literals;
 			player.Shoot(game);
-			std::this_thread::sleep_for(100ms);
+			std::this_thread::sleep_for(200ms);
 		}
 	);
 	inputComponent.AddBinding("left", [&player, &game]

@@ -31,7 +31,7 @@ void Player::Shoot(std::shared_ptr<GameInstance> gameInstance) const
 	const auto f = [x = _x, y = _y, gameInstance = std::move(gameInstance)]
 	{
 		const BulletActivity activity;
-		activity(x, y, gameInstance);
+		activity(x, y - 1, gameInstance);
 	};
 	std::thread t(f);
 	t.detach();

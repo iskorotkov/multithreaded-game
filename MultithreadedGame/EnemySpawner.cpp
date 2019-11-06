@@ -34,10 +34,10 @@ void EnemySpawner::Activity(std::shared_ptr<GameInstance> gameInstance)
 	_cv.wait_for(lock, 15s, [this] { return _gameStarted; });
 
 	_threadPool = std::make_unique<EnemyThreadPool>(gameInstance);
-	const auto& score = gameInstance->GetGameState()->GetScore();
-	Random random;
+	Random random(100);
 	for (;;)
 	{
+		const auto& score = gameInstance->GetGameState()->GetScore();
 		if (random() < score.Total() / 25 + 20)
 		{
 			const auto gameSettings = gameInstance->GetGameSettings();
@@ -45,6 +45,7 @@ void EnemySpawner::Activity(std::shared_ptr<GameInstance> gameInstance)
 			{
 				Random randomDirection(0, 2);
 				Random randomRow(gameSettings->MinEnemyRow(), gameSettings->MaxEnemyRow() + 1);
+				
 				// TODO: Remove cast from random int to enum.
 				const auto direction = static_cast<Direction>(randomDirection());
 				return Enemy(
@@ -53,6 +54,7 @@ void EnemySpawner::Activity(std::shared_ptr<GameInstance> gameInstance)
 					gameSettings->Width()
 				);
 			}();
+			
 			_threadPool->AddNewEnemy(std::move(enemy));
 
 			std::this_thread::sleep_for(1s);

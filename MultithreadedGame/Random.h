@@ -4,7 +4,8 @@
 class Random
 {
 public:
-	explicit Random(int min = 0, int max = 100);
+	explicit Random(int min, int max);
+	explicit Random(int max);
 
 	int operator()();
 

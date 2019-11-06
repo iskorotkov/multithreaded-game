@@ -15,10 +15,9 @@ void BulletActivity::operator()(const int x, int y, std::shared_ptr<GameInstance
 		return;
 	}
 
-	if (_m.try_lock())
+	const std::unique_lock lock(_m, std::try_to_lock);
+	if (lock.owns_lock())
 	{
-		std::lock_guard lock(_m, std::adopt_lock);
-
 		while (IsBulletOnScreen(x, y, gameInstance))
 		{
 			using namespace std::chrono_literals;

@@ -6,6 +6,10 @@ Random::Random(const int min, const int max) :
 {
 }
 
+Random::Random(const int max) : Random(0, max)
+{
+}
+
 int Random::operator()()
 {
 	return _distribution(_generator);
