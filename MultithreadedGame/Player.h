@@ -14,7 +14,7 @@ public:
 	void MoveRight();
 	void MoveLeft();
 	void Shoot(std::shared_ptr<GameInstance> gameInstance) const;
-	void Tick() const;
+	void Tick(std::shared_ptr<GameInstance> game) const;
 	void Render(std::shared_ptr<Console> console) const;
 
 	[[nodiscard]] std::pair<int, int> GetPosition() const;

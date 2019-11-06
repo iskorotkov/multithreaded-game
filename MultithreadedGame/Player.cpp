@@ -67,9 +67,10 @@ void Player::Shoot(std::shared_ptr<GameInstance> gameInstance) const
 	t.detach();
 }
 
-void Player::Tick() const
+void Player::Tick(const std::shared_ptr<GameInstance> game) const
 {
 	_inputComponent->ProcessInput();
+	Render(game->GetConsole());
 }
 
 void Player::Render(const std::shared_ptr<Console> console) const
