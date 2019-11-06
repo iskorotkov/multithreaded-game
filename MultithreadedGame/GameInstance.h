@@ -10,7 +10,7 @@ class AudioManager;
 class GameInstance : public std::enable_shared_from_this<GameInstance>
 {
 public:
-	static std::shared_ptr<GameInstance> Create(int rows, int columns);
+	static std::shared_ptr<GameInstance> Create();
 	
 	void Start();
 
@@ -19,11 +19,12 @@ public:
 	[[nodiscard]] std::shared_ptr<EnemySpawner> GetEnemySpawner() const;
 	[[nodiscard]] std::shared_ptr<GameSettings> GetGameSettings() const;
 	[[nodiscard]] std::shared_ptr<AudioManager> GetAudioManager() const;
+	void CreateGameComponents();
 
 protected:
 	GameInstance() = default;
 	
-	void Initialize(int rows, int columns);
+	void Initialize();
 
 private:
 	std::shared_ptr<GameState> _gameState;

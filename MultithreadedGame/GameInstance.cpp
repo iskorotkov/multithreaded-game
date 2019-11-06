@@ -15,10 +15,10 @@ void GameInstance::Start()
 	_isGameStarted = true;
 }
 
-std::shared_ptr<GameInstance> GameInstance::Create(const int rows, const int columns)
+std::shared_ptr<GameInstance> GameInstance::Create()
 {
 	const auto game = std::shared_ptr<GameInstance>(new GameInstance);
-	game->Initialize(rows, columns);
+	game->Initialize();
 	return game;
 }
 
@@ -47,16 +47,22 @@ std::shared_ptr<AudioManager> GameInstance::GetAudioManager() const
 	return _audioManager;
 }
 
-void GameInstance::Initialize(const int rows, const int columns)
+void GameInstance::CreateGameComponents()
 {
-	_gameState = std::make_shared<GameState>(rows, columns);
 	_console = std::make_shared<Console>(shared_from_this());
+	const auto dimensions = _console->GetConsoleDimensions();
+	
+	_gameState = std::make_shared<GameState>(dimensions.Height(), dimensions.Width());
 	_enemySpawner = std::make_shared<EnemySpawner>();
-	_gameSettings = std::make_shared<GameSettings>(rows, columns);
 	_audioManager = std::make_shared<AudioManager>();
+	_gameSettings = std::make_shared<GameSettings>(dimensions.Height(), dimensions.Width());
+}
+
+void GameInstance::Initialize()
+{
+	CreateGameComponents();
 
 	_console->SetCursorVisibility(false);
 	_console->ShowScore(_gameState->GetScore());
-
 	_enemySpawner->PrepareForSpawning(shared_from_this());
 }

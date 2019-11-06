@@ -4,6 +4,7 @@
 #include <memory>
 #include "Windows.h"
 #include <mutex>
+#include "Dimensions.h"
 
 class GameInstance;
 
@@ -23,6 +24,8 @@ public:
 	void ShowScore(const Score& score) const;
 	
 	void Clear() const;
+
+	Dimensions GetConsoleDimensions() const;
 
 private:
 	std::shared_ptr<GameInstance> _gameInstance;

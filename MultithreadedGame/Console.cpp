@@ -77,3 +77,12 @@ void Console::Clear() const
 		org,
 		&res);
 }
+
+Dimensions Console::GetConsoleDimensions() const
+{
+	CONSOLE_SCREEN_BUFFER_INFO info;
+	GetConsoleScreenBufferInfo(_cout, &info);
+	const auto height = info.srWindow.Bottom - info.srWindow.Top + 1;
+	const auto width = info.srWindow.Right - info.srWindow.Left + 1;
+	return Dimensions(width, height);
+}

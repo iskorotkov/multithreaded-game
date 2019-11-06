@@ -8,7 +8,7 @@
 
 int main()
 {
-	const auto game = GameInstance::Create(10, 50);
+	const auto game = GameInstance::Create();
 
 	const auto gameSettings = game->GetGameSettings();
 
