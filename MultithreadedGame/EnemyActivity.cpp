@@ -7,6 +7,7 @@
 #include "GameInstance.h"
 #include "Console.h"
 #include "EnemySpawner.h"
+#include "AudioManager.h"
 
 bool EnemyActivity::IsEnemyStillOnScreen(const Enemy& enemy, std::shared_ptr<GameSettings> gameSettings)
 {
@@ -76,5 +77,13 @@ void EnemyActivity::operator()(Enemy enemy, std::shared_ptr<GameInstance> gameIn
 
 	if (enemy.WasHit())
 	{
+		gameInstance->GetAudioManager()->MakeHitNoise();
+		gameState->GetScore().AddHit();
 	}
+	else
+	{
+		gameState->GetScore().AddMiss();
+	}
+
+	console->ShowScore(gameState->GetScore());
 }

@@ -5,6 +5,7 @@ class GameState;
 class Console;
 class EnemySpawner;
 class GameSettings;
+class AudioManager;
 
 class GameInstance : public std::enable_shared_from_this<GameInstance>
 {
@@ -17,6 +18,7 @@ public:
 	[[nodiscard]] std::shared_ptr<Console> GetConsole() const;
 	[[nodiscard]] std::shared_ptr<EnemySpawner> GetEnemySpawner() const;
 	[[nodiscard]] std::shared_ptr<GameSettings> GetGameSettings() const;
+	[[nodiscard]] std::shared_ptr<AudioManager> GetAudioManager() const;
 
 protected:
 	GameInstance() = default;
@@ -28,5 +30,6 @@ private:
 	std::shared_ptr<Console> _console;
 	std::shared_ptr<EnemySpawner> _enemySpawner;
 	std::shared_ptr<GameSettings> _gameSettings;
+	std::shared_ptr<AudioManager> _audioManager;
 	bool _isGameStarted = false;
 };

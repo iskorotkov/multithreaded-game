@@ -19,5 +19,5 @@ public:
 private:
 	int _width;
 	int _x, _y;
-	char _look = '^';
+	char _look = '|';
 };
