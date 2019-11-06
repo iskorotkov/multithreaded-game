@@ -14,9 +14,10 @@ Console::Console(std::shared_ptr<GameInstance> gameInstance) :
 
 void Console::WriteAt(const int x, const int y, char c) const
 {
-	std::lock_guard lock(_m);
 	const COORD pos = { static_cast<short>(x), static_cast<short>(y) };
 	DWORD res;
+
+	std::lock_guard lock(_m);
 	WriteConsoleOutputCharacterA(_cout, &c, 1, pos, &res);
 }
 
@@ -46,15 +47,18 @@ void Console::SetCursorVisibility(const bool visible) const
 
 void Console::ShowScore(const Score& score) const
 {
-	std::lock_guard lock(_m);
 	TCHAR s[128];
-	wsprintf(s, L"Thread War! Попаданий: %3d, Промахов: %3d", score.Hits(), score.Misses());
-	SetConsoleTitle(s);
+	wsprintf(s, L"Thread War! Попаданий: %d, Промахов: %d", score.Hits(), score.Misses());
 
-	if (score.Misses() >= 30)
 	{
-		MessageBox(nullptr, L"Game Over!", L"Thread War",MB_OK | MB_SETFOREGROUND);
-		ExitProcess(0);
+		std::lock_guard lock(_m);
+		SetConsoleTitle(s);
+
+		if (score.Misses() >= 30)
+		{
+			MessageBox(nullptr, L"Game Over!", L"Thread War",MB_OK | MB_SETFOREGROUND);
+			ExitProcess(0);
+		}
 	}
 
 	if (score.Total() % 20 == 0)
