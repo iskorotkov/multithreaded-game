@@ -7,6 +7,7 @@
 
 void EnemySpawner::StartSpawning()
 {
+	std::lock_guard lock(_m);
 	_gameStarted = true;
 	_cv.notify_all();
 }
