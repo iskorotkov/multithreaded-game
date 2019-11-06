@@ -1,11 +1,11 @@
 ﻿#include "Console.h"
 #include "Windows.h"
-#include "GameSettings.h"
 #include "GameInstance.h"
 #include "GameState.h"
 #include "EnemySpawner.h"
+#include "GameSettings.h"
 
-Console::Console(std::shared_ptr<GameInstance> gameInstance) :
+Console::Console(std::weak_ptr<GameInstance> gameInstance) :
 	_gameInstance(std::move(gameInstance))
 {
 	_cin = GetStdHandle(STD_INPUT_HANDLE);
@@ -63,13 +63,13 @@ void Console::ShowScore(const Score& score) const
 
 	if (score.Total() % 20 == 0)
 	{
-		_gameInstance->GetEnemySpawner()->DecrementSpawnDelay();
+		_gameInstance.lock()->GetEnemySpawner()->DecrementSpawnDelay();
 	}
 }
 
 void Console::Clear() const
 {
-	const auto gameSettings = _gameInstance->GetGameSettings();
+	const auto gameSettings = _gameInstance.lock()->GetGameSettings();
 	const COORD org = { 0, 0 };
 	DWORD res;
 

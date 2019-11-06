@@ -49,7 +49,7 @@ std::shared_ptr<AudioManager> GameInstance::GetAudioManager() const
 
 void GameInstance::CreateGameComponents()
 {
-	_console = std::make_shared<Console>(shared_from_this());
+	_console = std::make_shared<Console>(weak_from_this());
 	const auto dimensions = _console->GetConsoleDimensions();
 	
 	_gameState = std::make_shared<GameState>(dimensions.Height(), dimensions.Width());

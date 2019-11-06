@@ -11,7 +11,7 @@ class GameInstance;
 class Console
 {
 public:
-	explicit Console(std::shared_ptr<GameInstance> gameInstance);
+	explicit Console(std::weak_ptr<GameInstance> gameInstance);
 	
 	void WriteAt(int x, int y, char c) const;
 	void WriteAt(std::pair<int, int> position, char c) const;
@@ -28,7 +28,7 @@ public:
 	Dimensions GetConsoleDimensions() const;
 
 private:
-	std::shared_ptr<GameInstance> _gameInstance;
+	std::weak_ptr<GameInstance> _gameInstance;
 	mutable std::mutex _m;
 	
 	HANDLE _cin;
