@@ -40,24 +40,23 @@ void EnemySpawner::Activity(std::shared_ptr<GameInstance> gameInstance)
 		const auto& score = gameInstance->GetGameState()->GetScore();
 		if (random() < score.Total() / 25 + 20)
 		{
-			const auto gameSettings = gameInstance->GetGameSettings();
-			auto enemy = [gameSettings]
-			{
-				Random randomDirection(0, 2);
-				Random randomRow(gameSettings->MinEnemyRow(), gameSettings->MaxEnemyRow() + 1);
-				
-				// TODO: Remove cast from random int to enum.
-				const auto direction = static_cast<Direction>(randomDirection());
-				return Enemy(
-					direction,
-					randomRow(),
-					gameSettings->Width()
-				);
-			}();
-			
+			auto enemy = CreateNewEnemy(gameInstance->GetGameSettings());
 			_threadPool->AddNewEnemy(std::move(enemy));
-
-			std::this_thread::sleep_for(1s);
 		}
+		std::this_thread::sleep_for(1s);
 	}
+}
+
+Enemy EnemySpawner::CreateNewEnemy(std::shared_ptr<GameSettings> settings)
+{
+	Random randomDirection(0, 2);
+	Random randomRow(settings->MinEnemyRow(), settings->MaxEnemyRow() + 1);
+
+	// TODO: Remove cast from random int to enum.
+	const auto direction = static_cast<Direction>(randomDirection());
+	return Enemy(
+		direction,
+		randomRow(),
+		settings->Width()
+	);
 }

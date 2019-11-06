@@ -6,6 +6,7 @@
 
 class GameInstance;
 class SpawnerActivity;
+class GameSettings;
 
 class EnemySpawner
 {
@@ -24,4 +25,5 @@ private:
 	std::mutex _m;
 
 	void Activity(std::shared_ptr<GameInstance> gameInstance);
+	static Enemy CreateNewEnemy(std::shared_ptr<GameSettings> settings);
 };
