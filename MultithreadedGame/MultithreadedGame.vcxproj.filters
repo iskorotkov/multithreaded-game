@@ -150,4 +150,9 @@
       <Filter>Header Files\Actors</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\.gitattributes" />
+    <None Include="..\.gitignore" />
+    <None Include="..\Readme.md" />
+  </ItemGroup>
 </Project>
